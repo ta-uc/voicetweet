@@ -6,8 +6,7 @@ app = Flask(__name__)
 app.config['SECRET_KEY'] = os.environ['SEC']
 CONSUMER_TOKEN=os.environ['CON_TOKEN']
 CONSUMER_SECRET=os.environ['CON_SECRET']
-CALLBACK_URL = 'https://voicetweet.herokuapp.com/verify'
-#CALLBACK_URL = 'http://localhost:5000/verify'
+CALLBACK_URL = 'url_for_server/verify'
 
 @app.route("/")
 def send_token():
@@ -19,13 +18,11 @@ def send_token():
 	except tweepy.TweepError:
 		return 'Error! Failed to get request token'
 
-	#this is twitter's url for authentication
 	return flask.redirect(redirect_url)
 
 @app.route("/verify")
 def get_verification():
 
-	#get the verifier key from the request url
 	verifier = request.args['oauth_verifier']
 
 	auth = tweepy.OAuthHandler(CONSUMER_TOKEN, CONSUMER_SECRET)
