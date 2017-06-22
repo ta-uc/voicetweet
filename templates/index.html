@@ -1,0 +1,98 @@
+<html>
+    <head>
+        <title>Voice tweet</title>
+        <meta charset="utf-8">
+        <script src="https://code.jquery.com/jquery-1.10.1.min.js"></script>
+    </head>
+    <style type="text/css">
+    body {
+      -webkit-touch-callout:none;
+      -webkit-user-select:none;
+    }
+    </style>
+    <body>
+          {% if dvc == "pc" %}
+        <div  id="button"
+              onmousedown="startRecognition();"
+              onmouseup="stopRecog();"
+              style="width: 90vw;
+                     height:70%;
+                     background-color:#ced;
+                     border:1px solid #a7e;
+                     margin-left: auto;
+                     margin-right: auto;
+                     margin-top:40px;
+                     ">
+        </div>
+          {% elif dvc == "m" %}
+        <div  id="button"
+              ontouchstart="startRecognition();"
+              ontouchend="stopRecog();"
+              style="width: 90vw;
+                     height:70%;
+                     background-color:#ced;
+                     border:1px solid #a7e;
+                     margin-left: auto;
+                     margin-right: auto;
+                     margin-top:40px;
+                     ">
+        </div>
+          {% endif %}
+        <div id="state" style="
+            margin-left: auto;
+            margin-right: auto;
+            width: 30%;
+            text-align: center;
+            font-size: 3vw;">
+            緑のしかくを押しながらしゃべる
+        </div>
+        <div id="text" style="
+            margin-left: auto;
+            width: 70%;
+            margin-right: auto;
+            text-align: center;
+            font-size: 5vw;">
+        </div>
+    <script>
+<!--
+　　　　var button = document.getElementById('button');
+    var recognition = new webkitSpeechRecognition();
+    function changeButtonColor(){
+        button.style.backgroundColor = "#FFC1F4";
+    }
+　　　　function backButtonColor(){
+        button.style.backgroundColor = "#ced";
+    }
+    function startRecognition(){
+      recognition.start();
+　　　　　　changeButtonColor();
+    }
+    function stopRecog(){
+      recognition.stop();
+      backButtonColor();
+    }
+    recognition.lang = "ja-JP";
+    recognition.onsoundstart = function(){
+      document.getElementById("state").innerHTML = "認識中";
+    };
+    recognition.onnomatch = function(){
+        document.getElementById("text").innerHTML = "もう一度試してください";
+    };
+    recognition.onerror = function(){
+        document.getElementById("text").innerHTML = "エラー";
+    };
+    recognition.onsoundend = function(){
+        document.getElementById("state").innerHTML = "停止中";
+    };
+    recognition.onresult = function(event){
+        var results = event.results;
+        document.getElementById("text").innerHTML = 'Tweeted: '+results[0][0].transcript;
+        $.post(
+            './post', { tw: results[0][0].transcript}
+          );
+    };
+-->
+</script>
+    </body>
+</html>
+
